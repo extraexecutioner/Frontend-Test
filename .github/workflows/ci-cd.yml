@@ -23,7 +23,7 @@ jobs:
                   cache-dependency-path: ./frontend/package-lock.json
 
             - name: Linter Secure
-              run: npm lint
+              run: npm run lint
 
             - name: Build
               run: npm run build
