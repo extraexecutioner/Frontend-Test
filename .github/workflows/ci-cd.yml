@@ -23,7 +23,7 @@ jobs:
                   cache-dependency-path: ./main/package-lock.json
 
             - name: Linter Secure
-              run: npm run lint
+              run: npx oxlint
 
             - name: Build
               run: npm run build
