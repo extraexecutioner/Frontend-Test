@@ -22,8 +22,14 @@ jobs:
                   cache: npm
                   cache-dependency-path: ./main/package-lock.json
 
+            - name: Install Dependencies
+              run: npm ci
+
             - name: Linter Secure
               run: npx oxlint
 
             - name: Build
               run: npm run build
+
+    deploy:
+        runs-on: self_hosted
