@@ -28,6 +28,9 @@ jobs:
 
             - name: Install Node.js and NPM inside Alpine
               run: apk add --no-cache nodejs npm
+
+            - name: Fix Oxlint for Alpine
+              run: npm install @oxlint/binding-linux-x64-musl --no-save
                         
             - name: Install Dependences
               run: npm ci
