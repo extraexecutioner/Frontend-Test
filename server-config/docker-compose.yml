@@ -13,10 +13,9 @@ services:
                 condition: on-failure
       
     nginx-proxy:
-        image: jc21/nginx-proxy-manager:2.12.1
+        image: dockerhub.timeweb.cloud/library/nginx:alpine
         ports:
             - "80:80"
-            - "127.0.0.1:81:81"
         networks:
             - frontend-service-network
         volumes:
