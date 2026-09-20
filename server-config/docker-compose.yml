@@ -1,0 +1,36 @@
+name: CD-Test
+
+services:
+    frontend-service:
+        build:
+            context: ../main
+        networks:
+            - frontend-service-network
+        volumes:
+            - ./nginx/frontend.nginx.conf:/etc/nginx/conf.d/default.conf:ro
+        deploy:
+            restart_policy:
+                condition: on-failure
+      
+    nginx-proxy:
+        image: jc21/nginx-proxy-manager:2.12.1
+        ports:
+            - "80:80"
+            - "127.0.0.1:81:81"
+        networks:
+            - frontend-service-network
+        volumes:
+            - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+        depends_on:
+            - frontend-service
+        deploy:
+            restart_policy:
+                condition: on-failure
+            resources:
+                limits:
+                    memory: 312M
+                    cpus: '0.25'
+
+networks:
+    frontend-service-network:
+        driver: bridge
