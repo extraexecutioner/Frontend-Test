@@ -1,0 +1,42 @@
+name: Deploy The Code
+
+on:
+    push:
+        branches:
+            - main
+
+    workflow_dispatch:
+
+jobs:
+    ci-check:
+        runs-on: ubuntu-latest
+
+        defaults:
+            run:
+                working-directory: ./main
+        
+        steps:
+            - name: Clone Repository
+              uses: actions/checkout@v4
+            
+            - name: Setup Node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 22
+                  cache: npm
+                  cache-dependency-path: ./main
+            
+            - name: Install dependencies
+              run: npm ci
+            
+            - name: Linter Check
+              run: npm run lint
+
+            - name: Building The Product
+              run: npm run build
+
+            - name: Upload Artifact
+              uses: actions/upload-artifact@v4
+              with:
+                  name: Frontend Image
+                  path: main/dist
