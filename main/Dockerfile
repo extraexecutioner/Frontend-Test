@@ -14,4 +14,6 @@ FROM dockerhub.timeweb.cloud/library/nginx:mainline-alpine
 
 COPY --from=builder /app/dist /usr/share/nginx/html
 
+COPY ./server-config/nginx/frontend.nginx.conf /etc/nginx/conf.d/default.conf
+
 EXPOSE 80
