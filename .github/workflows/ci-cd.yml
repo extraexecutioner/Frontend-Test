@@ -15,9 +15,6 @@ jobs:
     ci-check:
         runs-on: ubuntu-latest
 
-        container:
-            image: alpine:3.20
-
         defaults:
             run:
                 working-directory: ./main
@@ -26,11 +23,12 @@ jobs:
             - name: Clone Repository Into Memory
               uses: actions/checkout@v4
 
-            - name: Install Node.js and NPM inside Alpine
-              run: apk add --no-cache nodejs npm
-
-            - name: Fix Oxlint for Alpine
-              run: npm install @oxlint/binding-linux-x64-musl --no-save
+            - name: Install NodeJS 22
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 22
+                  cache: npm
+                  cache-dependency-path: ./main/package-lock.json
                         
             - name: Install Dependences
               run: npm ci
