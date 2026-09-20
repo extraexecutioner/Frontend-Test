@@ -60,6 +60,4 @@ jobs:
                   path: ./main/dist
 
             - name: Update App
-              run: |
-                cd server-config
-                docker compose up -d --build frontend-service
+              run: docker compose up -d --build frontend-service
