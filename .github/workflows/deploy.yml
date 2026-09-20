@@ -46,6 +46,9 @@ jobs:
         runs-on: self-hosted
 
         steps:
+            - name: Copy Repository
+              uses: actions/checkout@v4
+              
             - name: Get Artifact
               uses: actions/download-artifact@v4
               with:
