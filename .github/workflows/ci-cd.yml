@@ -7,7 +7,7 @@ on:
     
     pull_request:
         paths: 
-            - ./main/**
+            - 'main/**'
         
     workflow_dispatch:
 
@@ -26,13 +26,9 @@ jobs:
             - name: Clone Repository Into Memory
               uses: actions/checkout@v4
 
-            - name: Setup Node 22 with Built-in Cache
-              uses: actions/setup-node@v4
-              with:
-                node-version: 22
-                cache: 'npm' 
-                cache-dependency-path: ./main/package-lock.json
-                
+            - name: Install Node.js and NPM inside Alpine
+              run: apk add --no-cache nodejs npm
+                        
             - name: Install Dependences
               run: npm ci
 
