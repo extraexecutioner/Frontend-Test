@@ -57,6 +57,6 @@ jobs:
 
             - name: Update App
               run: |
-                  cd server-config
                   docker build -t cd-test-frontend-service:latest -f main/Dockerfile .
-                  docker compose up -d --build frontend-service
+                  cd server-config
+                  docker compose up -d --build --force-recreate frontend-service
