@@ -24,7 +24,7 @@ jobs:
               with:
                   node-version: 22
                   cache: npm
-                  cache-dependency-path: ./main
+                  cache-dependency-path: ./main/package-lock.json
             
             - name: Install dependencies
               run: npm ci
@@ -45,10 +45,6 @@ jobs:
         needs: ci-check
         runs-on: self-hosted
 
-        defaults:
-            run:
-                working-directory: ./server-config
-
         steps:
             - name: Copy Repository
               uses: actions/checkout@v4
@@ -60,4 +56,6 @@ jobs:
                   path: ./main/dist
 
             - name: Update App
-              run: docker compose up -d --build frontend-service
+              run: |
+                  cd server-config
+                  docker compose up -d --build frontend-service
