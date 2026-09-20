@@ -2,9 +2,7 @@ name: CD-Test
 
 services:
     frontend-service:
-        build:
-            context: ../..
-            dockerfile: main/Dockerfile
+        image: cd-test-frontend-service:latest
         networks:
             - frontend-service-network
         deploy:
