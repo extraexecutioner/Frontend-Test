@@ -2,8 +2,12 @@ name: CI-CD Test
 
 on:
     push:
-        branches: 
+        branches-ignore: 
             - main
+    
+    pull_request:
+        paths: 
+            - ./main/**
         
     workflow_dispatch:
 
